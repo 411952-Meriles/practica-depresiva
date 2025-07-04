@@ -14,9 +14,9 @@ private httpService = inject(ApiService);
     pacientes: PacienteDTO[] = []
     
     formValues = {
-        paciente_id: null as number | null,
-        medico_id: null as number | null,
-        fecha: null
+        paciente_id: 0,
+        medico_id: 0,
+        fecha: ""
     }
     
 
@@ -37,11 +37,12 @@ private httpService = inject(ApiService);
     }
 
     onSubmit(event: Event) {
-        this.httpService.postTurnos({paciente_id: this.formValues.paciente_id, 
+        this.httpService.postTurnos({
+            paciente_id: this.formValues.paciente_id, 
             medico_id: this.formValues.medico_id,
 
             //Crear una fecha (LocalDate) a partir de un string. Si piden hora/minutos/segundos sacar split("T")[0] (LocalDateTime)
-            fecha: new Date(this.formValues.fecha!).toISOString().split("T")[0]} as CrearTurnoDTO)
+            fecha: this.formValues.fecha.split("T")[0]} as CrearTurnoDTO)
             .subscribe({
             next: (data) => console.log(data)
         })
