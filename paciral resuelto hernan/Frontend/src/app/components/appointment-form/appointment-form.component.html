@@ -1,0 +1,47 @@
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-bold mb-6">Nuevo Turno</h2>
+    <form class="space-y-6">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Paciente</label>
+            <select [(ngModel)]="idPaciente" [name]="'idPaciente'"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <option disabled selected>Seleccione un paciente</option>
+                <!-- Opciones de pacientes aquí -->
+              @for (paciente of pacientes;track $index){
+                <option [value]="paciente.id">{{paciente.nombre_completo}}</option>
+              }
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Médico</label>
+            <select [(ngModel)]="idMedico" [name]="'idMedico'"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <option disabled selected>Seleccione un médico</option>
+                <!-- Opciones de médicos aquí -->
+              @for(medico of medicos;track $index){
+                <option [value]="medico.id">{{medico.nombre_completo}}</option>
+              }
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Fecha y Hora</label>
+            <input [(ngModel)]="fecha" [name]="'fecha'" type="datetime-local"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        </div>
+
+        <div class="flex justify-end space-x-3">
+            <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm
+                font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2
+                focus:ring-offset-2 focus:ring-indigo-500">
+                Cancelar
+            </button>
+            <button (click)="crearTurno()" type="submit" class="bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm
+                text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2
+                focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400">
+                Guardar Turno
+            </button>
+        </div>
+    </form>
+</div>
